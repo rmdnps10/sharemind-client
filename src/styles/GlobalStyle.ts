@@ -35,15 +35,20 @@ export const GlobalStyle = createGlobalStyle`
     font-size:10px;
     box-sizing: border-box;
   }
-
+  /*app 가운데 정렬*/
   body {
-    height: 100vh;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
     margin: 0px;
+  }
+  #root{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
   }
   input {
    border: none;

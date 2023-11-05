@@ -1,8 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-import { GlobalStyle } from './styles/GlobalStyle.ts';
 import { BrowserRouter } from 'react-router-dom';
+import AppContainer from 'components/Common/AppContainer.tsx';
+import { GlobalStyle } from 'styles/GlobalStyle.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -10,8 +10,10 @@ const root = ReactDOM.createRoot(
 root.render(
   //<React.StrictMode>
   <BrowserRouter>
-    <GlobalStyle />
-    <App />
+    <AppContainer>
+      <GlobalStyle />
+      <App />
+    </AppContainer>
   </BrowserRouter>,
   //</React.StrictMode>,
 );

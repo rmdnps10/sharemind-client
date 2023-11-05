@@ -6,7 +6,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
   fontSize?: string;
   fontWeight?: string;
-  children?: JSX.Element;
+  children?: string;
   onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
 }
 export const Button = ({
