@@ -8,7 +8,6 @@ export const RequestHeader = () => {
     </RequestHeaderContainer>
   );
 };
-//export default RequestHeader;
 
 const RequestHeaderContainer = styled.div`
   display: flex;
@@ -19,6 +18,7 @@ const RequestHeaderContainer = styled.div`
 const HeaderText = styled.div`
   font-size: 2.4rem;
   font-weight: 700;
+  margin-bottom
 `;
 const HeaderSubText = styled.div`
   font-size: 2.1rem;
