@@ -9,9 +9,10 @@ interface InputProps {
   value?: string;
   status?: 'active' | 'complete' | 'finish' | undefined;
   placeholder?: string;
-  onChange?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e?: React.FocusEvent<HTMLElement>) => void;
-  onBlur?: (e?: React.FocusEvent<HTMLElement>) => void;
+  startPoint?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLElement>) => void;
 }
 export const Input = ({
   width = 'fit-content',
@@ -22,6 +23,7 @@ export const Input = ({
   value,
   status = 'active',
   placeholder,
+  startPoint = '1rem',
   onChange,
   onFocus,
   onBlur,
@@ -36,6 +38,7 @@ export const Input = ({
         fontWeight={fontWeight}
         value={value}
         placeholder={placeholder}
+        startPoint={startPoint}
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -75,6 +78,7 @@ const StyledInput = styled.input<{
   height: string;
   fontSize: string;
   fontWeight: string;
+  startPoint: string;
   backgroundColor: string;
   color: string;
 }>`
@@ -82,11 +86,11 @@ const StyledInput = styled.input<{
   border-radius: 3rem;
   color: ${(props) => props.color};
   background-color: ${(props) => props.backgroundColor};
-  width: calc(${(props) => `calc(${props.width} - 1rem)`});
+  width: calc(${(props) => `calc(${props.width} - ${props.startPoint})`});
   height: ${(props) => props.height};
   font-size: ${(props) => props.fontSize};
   font-weight: ${(props) => props.fontWeight};
-  padding-left: 1rem;
+  padding-left: ${(props) => props.startPoint};
   &::placeholder {
     font-weight: 400;
   }
