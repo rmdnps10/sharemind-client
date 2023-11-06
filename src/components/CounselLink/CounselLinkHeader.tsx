@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 //나중에 상담사 번호가져오기
-export const PaymentHeader = () => {
+export const CounselLinkHeader = () => {
   return (
-    <PaymentHeaderContainer>
+    <CounselLinkHeaderContainer>
       <HeaderText>ShareMind</HeaderText>
       <HeaderSubText>
-        아래 오픈채팅 링크에 참여하여 오픈채팅 송금 방식으로 결제해 주세요.
+        상담 링크에 접속하기 위해 비밀번호를 입력해 주세요.
       </HeaderSubText>
-    </PaymentHeaderContainer>
+    </CounselLinkHeaderContainer>
   );
 };
 
-const PaymentHeaderContainer = styled.div`
+const CounselLinkHeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
@@ -23,4 +23,5 @@ const HeaderText = styled.div`
 const HeaderSubText = styled.div`
   font-size: 2.1rem;
   font-weight: 700;
+  margin-bottom: 2.4rem;
 `;
