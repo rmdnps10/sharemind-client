@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BK } from 'styles/color';
 export const EmailInput = () => {
   const [input, setInput] = useState('');
-  const handleOnChage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,8 +20,9 @@ export const EmailInput = () => {
           width="41.7rem"
           height="6rem"
           fontSize="2.2rem"
+          startPoint="2rem"
           value={input}
-          onChange={() => handleOnChage}
+          onChange={handleOnChange}
         />
         <EmailDetailText color={BK}>
           이메일로도 상담 링크가 전송되며 내 상담 링크와 비밀번호를 찾으실 수
