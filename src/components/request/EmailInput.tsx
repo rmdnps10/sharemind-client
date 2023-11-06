@@ -13,7 +13,6 @@ export const EmailInput = () => {
   };
   return (
     <EmailInputContainer>
-      {input}
       <EmailInputText color={BK}>이메일 입력*</EmailInputText>
       <form onSubmit={handleOnSubmit}>
         <Input
