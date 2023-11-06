@@ -1,16 +1,15 @@
 import styled from 'styled-components';
-export const CounselLinkHeader = () => {
+//나중에 상담자 이름
+export const RatingHeader = () => {
   return (
-    <CounselLinkHeaderContainer>
+    <RatingHeaderContainer>
       <HeaderText>ShareMind</HeaderText>
-      <HeaderSubText>
-        상담 링크에 접속하기 위해 비밀번호를 입력해 주세요.
-      </HeaderSubText>
-    </CounselLinkHeaderContainer>
+      <HeaderSubText>판매자이름 님과의 상담을 평가해주세요.</HeaderSubText>
+    </RatingHeaderContainer>
   );
 };
 
-const CounselLinkHeaderContainer = styled.div`
+const RatingHeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
@@ -22,5 +21,5 @@ const HeaderText = styled.div`
 const HeaderSubText = styled.div`
   font-size: 2.1rem;
   font-weight: 700;
-  margin-bottom: 2.4rem;
+  margin-bottom: 4.8rem;
 `;
