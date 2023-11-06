@@ -21,5 +21,4 @@ const HeaderText = styled.div`
 const HeaderSubText = styled.div`
   font-size: 2.1rem;
   font-weight: 700;
-  margin-bottom: 4.8rem;
 `;

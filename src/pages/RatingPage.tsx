@@ -1,10 +1,11 @@
-import { RatingHeader } from 'components/Rating';
+import { RatingHeader, RatingReview } from 'components/Rating';
 import styled from 'styled-components';
 
 const RatingPage = () => {
   return (
     <RatingPageContainer>
       <RatingHeader />
+      <RatingReview />
     </RatingPageContainer>
   );
 };
