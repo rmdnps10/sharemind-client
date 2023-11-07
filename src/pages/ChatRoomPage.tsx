@@ -16,9 +16,7 @@ const ChatRoomPage = () => {
   // 경고 모달창 띄울지
   const [isCaution, setIsCaution] = useState<boolean>();
   // 인트로 띄울지
-  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>(
-    true,
-  );
+  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>(true);
   // input 활성화 여부
   const [isActiveInput, setIsActiveInput] = useState<boolean>();
   // 고객, 상담자의 메시지 상태
@@ -33,12 +31,12 @@ const ChatRoomPage = () => {
 
   // useEffect 훅 안에서 후에 백엔드와 연결하여 데이터 fetch,,
   useEffect(() => {
-    // 백엔드 연결시 axios.get 추가 
+    // 백엔드 연결시 axios.get 추가
     setName('정인영');
-    setIsCustomer(false);
+    setIsCustomer(true);
     setMessages({
-      customer: ['안녕하세요', '헐헐 진짜 너무 힘들어요 요즘에'],
-      counselor: ['자살하세요'],
+      customer: ['안녕하세요', "흑흑 너무힘들엉"],
+      counselor: ['조금만 더 힘내세요'],
     });
     setIsVisibleIntro(false);
     if (isCustomer) {
@@ -78,7 +76,7 @@ const ChatRoomPage = () => {
           setMessages={setMessages}
           setIsActiveInput={setIsActiveInput}
           setIsVisibleIntro={setIsVisibleIntro}
-          isCustomer = {isCustomer}
+          isCustomer={isCustomer}
         />
       ) : (
         ''
