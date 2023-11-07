@@ -64,24 +64,27 @@ const ChatInputBox = styled.div`
   height: 3rem;
   border-radius: 4rem;
   background: rgba(217, 217, 217, 1);
-  padding: 0.5rem;
+  padding: 1rem;
   gap: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
-const StyledInput = styled.textarea`
+const StyledInput = styled.textarea<{ value: string }>`
   width: 65%;
-  height: 1.4rem;
-  font-size: 1.4rem;
+  height: 1.7rem;
+  @media (max-width: 767px) {
+    font-size: 1.4rem;
+  }
+  font-size: 1.7rem;
   background: rgba(217, 217, 217, 1);
-  line-height: 1.6rem;
+  line-height: 2rem;
   resize: none;
   outline: none;
   border: none;
 `;
 const SubmitButton = styled.button<{ $isActive: boolean }>`
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   font-weight: 600;
   visibility: ${(props) => (props.$isActive ? 'visible' : 'hidden')};
 `;
