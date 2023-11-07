@@ -37,7 +37,7 @@ function ChatInput({
           }
           disabled={!isActiveInput}
         />
-        <SubmitButton onClick={textSubmit} isActive={isActiveInput}>
+        <SubmitButton onClick={textSubmit} $isActive={isActiveInput}>
           작성하기
         </SubmitButton>
       </ChatInputBox>
@@ -50,7 +50,7 @@ const ChatInputWrapper = styled.div`
     width: 86%;
   }
   @media (min-width: 768px) {
-    width: 38rem;
+    width: 42rem;
   }
 
   position: fixed;
@@ -80,10 +80,10 @@ const StyledInput = styled.textarea`
   outline: none;
   border: none;
 `;
-const SubmitButton = styled.button<{ isActive: boolean }>`
+const SubmitButton = styled.button<{ $isActive: boolean }>`
   font-size: 1.4rem;
   font-weight: 600;
-  visibility: ${(props) => (props.isActive ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.$isActive ? 'visible' : 'hidden')};
 `;
 
 export default ChatInput;

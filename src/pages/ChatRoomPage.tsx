@@ -1,4 +1,5 @@
 import CautionModal from 'components/Chatting/CautionModal';
+import ChatBubble from 'components/Chatting/ChatBubble';
 import ChatHeader from 'components/Chatting/ChatHeader';
 import ChatInput from 'components/Chatting/ChatInput';
 import { useEffect, useState } from 'react';
@@ -23,7 +24,7 @@ const ChatRoomPage = () => {
     customer: [],
     counselor: [],
   });
-
+  console.log(messages);
   // 상담사 이름 설정
   const [name, setName] = useState<string>('');
   // input
@@ -34,6 +35,7 @@ const ChatRoomPage = () => {
     setIsCustomer(true);
     setName('정인영');
   }, []);
+  console.log(messages);
 
   return (
     <ChatRoomPageContainer>
@@ -50,10 +52,13 @@ const ChatRoomPage = () => {
       ) : (
         ''
       )}
+      {messages.customer.map((el,idx) => (
+        <ChatBubble text={el} key={idx}/>
+      ))}
 
       <ChatInput
         isActiveInput={isActiveInput}
-        isCaution = {isCaution}
+        isCaution={isCaution}
         setInputText={setInputText}
         inputText={inputText}
         setIsCaution={setIsCaution}

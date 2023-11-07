@@ -6,7 +6,7 @@ interface CautionModalProps {
   inputText: string;
   setInputText: any;
   setIsActiveInput: any;
-  setIsVisbileIntro: any;
+  setIsVisibleIntro: any;
 }
 
 function CautionModal({
@@ -19,7 +19,7 @@ function CautionModal({
 }: CautionModalProps) {
   const onYesClick = () => {
     setMessages((prev: any) => {
-      return { ...prev, customer: inputText };
+      return { ...prev, customer: [...prev.customer, inputText] };
     });
     setInputText('');
     setIsCaution(false);
