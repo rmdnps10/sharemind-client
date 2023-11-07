@@ -5,7 +5,7 @@ interface ChatBubbleProps {
   text: string;
   name: string;
   isSubject: boolean;
-  isCustomer: boolean;
+  isCustomer: boolean | undefined;
 }
 function ChatBubble({ text, isSubject, isCustomer, name }: ChatBubbleProps) {
   const [subject, setSubject] = useState('');

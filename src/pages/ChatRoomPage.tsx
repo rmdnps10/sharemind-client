@@ -12,11 +12,11 @@ interface messages {
 
 const ChatRoomPage = () => {
   // 고객인지, 상담사인지여부에 따라 랜더링 여부 다르게
-  const [isCustomer, setIsCustomer] = useState<boolean>();
+  const [isCustomer, setIsCustomer] = useState<boolean | undefined>();
   // 경고 모달창 띄울지
   const [isCaution, setIsCaution] = useState<boolean>();
   // 인트로 띄울지
-  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>();
+  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean | undefined>();
   // input 활성화 여부
   const [isActiveInput, setIsActiveInput] = useState<boolean>();
   // 고객, 상담자의 메시지 상태
@@ -32,14 +32,37 @@ const ChatRoomPage = () => {
 
   // useEffect 훅 안에서 후에 백엔드와 연결하여 데이터 fetch,,
   useEffect(() => {
-    setIsCustomer(true);
+    setIsCustomer(false);
     setMessages({
       customer: ['안녕하세요', '헐헐 진짜 너무 힘들어요 요즘에'],
       counselor: ['자살하세요'],
     });
     setName('정인영');
+    if (isCustomer) {
+      if (messages.counselor.length === 0 && messages.customer.length === 0) {
+        setIsActiveInput(true);
+      } else if (
+        messages.counselor.length === 1 &&
+        messages.customer.length === 1
+      ) {
+        setIsActiveInput(true);
+      } else {
+        setIsActiveInput(false);
+      }
+    } else {
+      if (messages.counselor.length === 0 && messages.customer.length === 1) {
+        setIsActiveInput(true);
+      } else if (
+        messages.counselor.length === 1 &&
+        messages.customer.length === 2
+      ) {
+        setIsActiveInput(true);
+      } else {
+        setIsActiveInput(false);
+      }
+    }
   }, []);
-  
+
   return (
     <ChatRoomPageContainer>
       <ChatHeader name={name} isVisibleIntro={isVisibleIntro} />

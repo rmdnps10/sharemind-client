@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 interface ChatHeaderProps {
   name: string;
-  isVisibleIntro : boolean;
+  isVisibleIntro : boolean | undefined;
 }
 function ChatHeader({ name, isVisibleIntro }: ChatHeaderProps) {
   return (

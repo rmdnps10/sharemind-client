@@ -5,8 +5,8 @@ interface ChatInputProps {
   setIsCaution: any;
   setInputText: any;
   inputText: string;
-  isActiveInput: boolean;
-  isCaution: boolean;
+  isActiveInput: boolean | undefined;
+  isCaution: boolean | undefined;
 }
 function ChatInput({
   setIsCaution,
@@ -83,7 +83,7 @@ const StyledInput = styled.textarea<{ value: string }>`
   outline: none;
   border: none;
 `;
-const SubmitButton = styled.button<{ $isActive: boolean }>`
+const SubmitButton = styled.button<{ $isActive: boolean | undefined }>`
   font-size: 1.7rem;
   font-weight: 600;
   visibility: ${(props) => (props.$isActive ? 'visible' : 'hidden')};
