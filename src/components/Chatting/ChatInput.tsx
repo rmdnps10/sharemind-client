@@ -6,14 +6,19 @@ interface ChatInputProps {
   setInputText: any;
   inputText: string;
   isActiveInput: boolean;
+  isCaution: boolean;
 }
 function ChatInput({
   setIsCaution,
   inputText,
   setInputText,
   isActiveInput,
+  isCaution,
 }: ChatInputProps) {
   const textChange = (e: any) => {
+    if (isCaution) {
+      return;
+    }
     setInputText(e.target.value);
   };
   const textSubmit = () => {
@@ -75,7 +80,7 @@ const StyledInput = styled.textarea`
   outline: none;
   border: none;
 `;
-const SubmitButton = styled.button<{isActive: boolean}>`
+const SubmitButton = styled.button<{ isActive: boolean }>`
   font-size: 1.4rem;
   font-weight: 600;
   visibility: ${(props) => (props.isActive ? 'visible' : 'hidden')};
