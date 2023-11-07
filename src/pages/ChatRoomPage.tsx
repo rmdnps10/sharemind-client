@@ -16,15 +16,16 @@ const ChatRoomPage = () => {
   // 경고 모달창 띄울지
   const [isCaution, setIsCaution] = useState<boolean>();
   // 인트로 띄울지
-  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean | undefined>();
+  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean | undefined>(
+    true,
+  );
   // input 활성화 여부
   const [isActiveInput, setIsActiveInput] = useState<boolean>();
   // 고객, 상담자의 메시지 상태
   const [messages, setMessages] = useState<messages>({
-    customer: [],
-    counselor: [],
+    customer: [''],
+    counselor: [''],
   });
-  console.log(messages);
   // 상담사 이름 설정
   const [name, setName] = useState<string>('');
   // input
@@ -32,12 +33,13 @@ const ChatRoomPage = () => {
 
   // useEffect 훅 안에서 후에 백엔드와 연결하여 데이터 fetch,,
   useEffect(() => {
+    setName('정인영');
     setIsCustomer(false);
     setMessages({
       customer: ['안녕하세요', '헐헐 진짜 너무 힘들어요 요즘에'],
       counselor: ['자살하세요'],
     });
-    setName('정인영');
+    setIsVisibleIntro(false);
     if (isCustomer) {
       if (messages.counselor.length === 0 && messages.customer.length === 0) {
         setIsActiveInput(true);
@@ -57,11 +59,12 @@ const ChatRoomPage = () => {
         messages.customer.length === 2
       ) {
         setIsActiveInput(true);
+        console.log(messages);
       } else {
         setIsActiveInput(false);
       }
     }
-  }, []);
+  }, [messages.customer.length, messages.counselor.length]);
 
   return (
     <ChatRoomPageContainer>

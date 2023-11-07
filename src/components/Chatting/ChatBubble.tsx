@@ -23,7 +23,7 @@ function ChatBubble({ text, isSubject, isCustomer, name }: ChatBubbleProps) {
         setSubject('내담자');
       }
     }
-  }, []);
+  }, [name]);
 
   return (
     <ChatBubbleContainer $isSubject={isSubject}>
