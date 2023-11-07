@@ -15,7 +15,7 @@ const CounselLinkHeaderContainer = styled.div`
   flex-direction: column;
   gap: 2.4rem;
 `;
-const HeaderText = styled.div`
+export const HeaderText = styled.div`
   font-size: 2.4rem;
   font-weight: 700;
 `;
