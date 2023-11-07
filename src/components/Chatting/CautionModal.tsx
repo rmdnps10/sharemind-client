@@ -7,6 +7,7 @@ interface CautionModalProps {
   setInputText: any;
   setIsActiveInput: any;
   setIsVisibleIntro: any;
+  isCustomer: boolean | undefined;
 }
 
 function CautionModal({
@@ -16,10 +17,16 @@ function CautionModal({
   setMessages,
   setIsActiveInput,
   setIsVisibleIntro,
+  isCustomer,
 }: CautionModalProps) {
   const onYesClick = () => {
+    // 백엔드 연결시 axios.post 코드 추가
     setMessages((prev: any) => {
-      return { ...prev, customer: [...prev.customer, inputText] };
+      if (isCustomer) {
+        return { ...prev, customer: [...prev.customer, inputText] };
+      } else {
+        return { ...prev, customer: [...prev.counselor, inputText] };
+      }
     });
     setInputText('');
     setIsCaution(false);

@@ -12,11 +12,11 @@ interface messages {
 
 const ChatRoomPage = () => {
   // 고객인지, 상담사인지여부에 따라 랜더링 여부 다르게
-  const [isCustomer, setIsCustomer] = useState<boolean | undefined>();
+  const [isCustomer, setIsCustomer] = useState<boolean>();
   // 경고 모달창 띄울지
   const [isCaution, setIsCaution] = useState<boolean>();
   // 인트로 띄울지
-  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean | undefined>(
+  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>(
     true,
   );
   // input 활성화 여부
@@ -33,6 +33,7 @@ const ChatRoomPage = () => {
 
   // useEffect 훅 안에서 후에 백엔드와 연결하여 데이터 fetch,,
   useEffect(() => {
+    // 백엔드 연결시 axios.get 추가 
     setName('정인영');
     setIsCustomer(false);
     setMessages({
@@ -77,6 +78,7 @@ const ChatRoomPage = () => {
           setMessages={setMessages}
           setIsActiveInput={setIsActiveInput}
           setIsVisibleIntro={setIsVisibleIntro}
+          isCustomer = {isCustomer}
         />
       ) : (
         ''
