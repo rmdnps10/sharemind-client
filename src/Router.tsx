@@ -1,3 +1,5 @@
+import AdminPage from 'pages/AdminPage';
+import ChatRoomPage from 'pages/ChatRoomPage';
 import CounselLinkPage from 'pages/CounselLinkPage';
 import PaymentPage from 'pages/PaymentPage';
 import RatingPage from 'pages/RatingPage';
@@ -12,6 +14,8 @@ const Router = () => {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/counselLink" element={<CounselLinkPage />} />
         <Route path="/rating" element={<RatingPage />} />
+        <Route path="/chat" element={<ChatRoomPage/>}></Route>
+        <Route path="/admin" element={<AdminPage/>}></Route>
       </Routes>
     </>
   );
