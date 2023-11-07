@@ -16,11 +16,15 @@ const ChatRoomPage = () => {
   const [isCaution, setIsCaution] = useState<boolean>(false);
   // 인트로 띄울지
   const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>(true);
+  // input 활성화 여부 
+  const [isActiveInput, setIsActiveInput] = useState<boolean>(true);
   // 고객, 상담자의 메시지 상태
   const [messages, setMessages] = useState<messages>({
     customer: [],
     counselor: [],
   });
+  
+
   // 상담사 이름 설정
   const [name, setName] = useState<string>('');
   // input
@@ -41,12 +45,14 @@ const ChatRoomPage = () => {
           setInputText={setInputText}
           setIsCaution={setIsCaution}
           setMessages={setMessages}
+          setIsActiveInput= {setIsActiveInput}
         />
       ) : (
         ''
       )}
 
       <ChatInput
+      isActiveInput = {isActiveInput}
         setInputText={setInputText}
         inputText={inputText}
         setIsCaution={setIsCaution}

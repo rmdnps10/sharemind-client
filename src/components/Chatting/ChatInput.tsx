@@ -5,8 +5,14 @@ interface ChatInputProps {
   setIsCaution: any;
   setInputText: any;
   inputText: string;
+  isActiveInput: boolean;
 }
-function ChatInput({ setIsCaution, inputText, setInputText }: ChatInputProps) {
+function ChatInput({
+  setIsCaution,
+  inputText,
+  setInputText,
+  isActiveInput,
+}: ChatInputProps) {
   const textChange = (e: any) => {
     setInputText(e.target.value);
   };
@@ -16,8 +22,19 @@ function ChatInput({ setIsCaution, inputText, setInputText }: ChatInputProps) {
   return (
     <ChatInputWrapper>
       <ChatInputBox>
-        <StyledInput onChange={textChange} value={inputText} />
-        <SubmitButton onClick={textSubmit}>작성하기</SubmitButton>
+        <StyledInput
+          onChange={textChange}
+          value={inputText}
+          placeholder={
+            isActiveInput
+              ? '상담을 받을 내용을 입력해주세요.'
+              : '상담 내용 전송이 완료되었습니다'
+          }
+          disabled={!isActiveInput}
+        />
+        <SubmitButton onClick={textSubmit} isActive={isActiveInput}>
+          작성하기
+        </SubmitButton>
       </ChatInputBox>
     </ChatInputWrapper>
   );
@@ -58,9 +75,10 @@ const StyledInput = styled.textarea`
   outline: none;
   border: none;
 `;
-const SubmitButton = styled.button`
+const SubmitButton = styled.button<{isActive: boolean}>`
   font-size: 1.4rem;
   font-weight: 600;
+  visibility: ${(props) => (props.isActive ? 'visible' : 'hidden')};
 `;
 
 export default ChatInput;
