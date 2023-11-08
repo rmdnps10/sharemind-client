@@ -34,7 +34,7 @@ function ChatInput({
             isActiveInput
               ? '상담을 받을 내용을 입력해주세요.'
               : isActiveCounsel
-              ? ''
+              ? '상담 내용 전송이 완료되었습니다.'
               : '종료된 상담입니다.'
           }
           disabled={!isActiveInput}

@@ -19,7 +19,7 @@ const ChatRoomPage = () => {
   const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>(true);
   // input 활성화 여부
   const [isActiveInput, setIsActiveInput] = useState<boolean>();
-  // 상담 종료 여부 (24시간 내 답장안하거나, 추가질문이 아예 끝난상태 , 상담이 종료되는 경우는 
+  // 상담 종료 여부 (24시간 내 답장안하거나, 추가질문이 아예 끝난상태 , 상담이 종료되는 경우는
   const [isActiveCounsel, setIsActiveCounsel] = useState<boolean>();
   // 고객, 상담자의 메시지 상태
   const [messages, setMessages] = useState<messages>({
@@ -37,7 +37,7 @@ const ChatRoomPage = () => {
     setName('정인영');
     setIsCustomer(true);
     setMessages({
-      customer: ['안녕하세요', "흑흑 너무힘들엉"],
+      customer: ['안녕하세요', '흑흑 너무힘들엉'],
       counselor: ['조금만 더 힘내세요'],
     });
     setIsVisibleIntro(false);
@@ -66,6 +66,7 @@ const ChatRoomPage = () => {
         // 만약에 채팅방의 상담 환불 여부, 상담 종료 여부가 true일 경우 : setIsActiveCounsel(false).
       }
     }
+    setIsActiveCounsel(true);
   }, [messages.customer.length, messages.counselor.length]);
 
   return (
