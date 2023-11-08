@@ -37,7 +37,10 @@ const ChatRoomPage = () => {
     setName('정인영');
     setIsCustomer(false);
     setMessages({
-      customer: ['안녕하세요', '흑흑 너무힘들엉'],
+      customer: [
+        '안녕하세요안녕하세요안녕하세요안녕하안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안안녕하세요안녕하세요안녕하세요안녕하안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요녕하세요안녕하세요안녕하세요안녕하세요',
+        '흑흑 너무힘들엉',
+      ],
       counselor: ['조금만 더 힘내세요'],
     });
     setIsVisibleIntro(false);
@@ -87,46 +90,48 @@ const ChatRoomPage = () => {
         ''
       )}
 
-      {messages.customer.length > 0 ? (
-        <ChatBubble
-          text={messages.customer[0]}
-          name={name}
-          isSubject={isCustomer ? true : false}
-          isCustomer={isCustomer}
-        />
-      ) : (
-        ''
-      )}
-      {messages.counselor.length > 0 ? (
-        <ChatBubble
-          text={messages.counselor[0]}
-          name={name}
-          isSubject={isCustomer ? false : true}
-          isCustomer={isCustomer}
-        />
-      ) : (
-        ''
-      )}
-      {messages.customer.length > 1 ? (
-        <ChatBubble
-          text={messages.customer[1]}
-          name={name}
-          isSubject={isCustomer ? true : false}
-          isCustomer={isCustomer}
-        />
-      ) : (
-        ''
-      )}
-      {messages.counselor.length > 1 ? (
-        <ChatBubble
-          text={messages.counselor[1]}
-          name={name}
-          isSubject={isCustomer ? false : true}
-          isCustomer={isCustomer}
-        />
-      ) : (
-        ''
-      )}
+      <ChatBubbleContainer>
+        {messages.customer.length > 0 ? (
+          <ChatBubble
+            text={messages.customer[0]}
+            name={name}
+            isSubject={isCustomer ? true : false}
+            isCustomer={isCustomer}
+          />
+        ) : (
+          ''
+        )}
+        {messages.counselor.length > 0 ? (
+          <ChatBubble
+            text={messages.counselor[0]}
+            name={name}
+            isSubject={isCustomer ? false : true}
+            isCustomer={isCustomer}
+          />
+        ) : (
+          ''
+        )}
+        {messages.customer.length > 1 ? (
+          <ChatBubble
+            text={messages.customer[1]}
+            name={name}
+            isSubject={isCustomer ? true : false}
+            isCustomer={isCustomer}
+          />
+        ) : (
+          ''
+        )}
+        {messages.counselor.length > 1 ? (
+          <ChatBubble
+            text={messages.counselor[1]}
+            name={name}
+            isSubject={isCustomer ? false : true}
+            isCustomer={isCustomer}
+          />
+        ) : (
+          ''
+        )}
+      </ChatBubbleContainer>
 
       <ChatInput
         isActiveInput={isActiveInput}
@@ -144,8 +149,18 @@ const ChatRoomPageContainer = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: start;
   margin: 3rem;
 `;
 
+const ChatBubbleContainer = styled.div`
+  @media (max-width: 767px) {
+    height: 74vh;
+  }
+  @media (min-width: 768px) {
+    height: 74vh;
+  }
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+`;
 export default ChatRoomPage;
