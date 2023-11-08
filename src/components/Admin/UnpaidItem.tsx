@@ -6,7 +6,7 @@ interface UnPaidItemProps {
   customerEmail: string;
   counselorEmail: string;
   date: string;
-  setIsVisibleModal: any;
+  setIsVisibleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UnpaidItem({

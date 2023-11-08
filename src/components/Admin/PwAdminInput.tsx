@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface PwAdminInputProps {
@@ -6,13 +6,18 @@ interface PwAdminInputProps {
 }
 function PwAdminInput({ setIsCorrectPw }: PwAdminInputProps) {
   const onSubmitButtonClick = () => {
+    // userInput과 비밀번호가 같은지 확인, 다르면 다르다고 알림
     setIsCorrectPw(true);
+  };
+  const [userInput, setUserInput] = useState<string>('');
+  const onTextChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+    setUserInput(e.target.value);
   };
   return (
     <PWAdminInputForm>
       <FormTitle>암호 입력</FormTitle>
       <Flex>
-        <PasswordField />
+        <PasswordField value={userInput} onChange={onTextChange} />
         <SubmitButton onClick={onSubmitButtonClick}>확인</SubmitButton>
       </Flex>
     </PWAdminInputForm>

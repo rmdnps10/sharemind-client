@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import UnpaidItem from './UnpaidItem';
 interface UnpaidListProps {
-  setIsVisibleModal: any;
+  setIsVisibleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 function UnpaidList({ setIsVisibleModal }: UnpaidListProps) {
   return (
@@ -16,7 +16,7 @@ function UnpaidList({ setIsVisibleModal }: UnpaidListProps) {
         customerEmail="rmdnps10@gmail.com"
         counselorEmail="rmdnps10@gmial.com"
         date="2023-11-04"
-        setIsVisibleModal = {setIsVisibleModal}
+        setIsVisibleModal={setIsVisibleModal}
       />
     </UnpaidListContainer>
   );

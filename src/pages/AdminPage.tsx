@@ -1,7 +1,6 @@
 import PayCheckModal from 'components/Admin/PayCheckModal';
 import PwAdminInput from 'components/Admin/PwAdminInput';
 import UnpaidList from 'components/Admin/UnpaidList';
-import ChatHeader from 'components/Chatting/ChatHeader';
 import { HeaderText } from 'components/CounselLink';
 import { useState } from 'react';
 import styled from 'styled-components';
