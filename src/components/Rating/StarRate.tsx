@@ -33,16 +33,31 @@ export const StarRate = ({ starRating, setStarRating }: StarRateProps) => {
 const StarRateContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 42rem;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 42rem;
+  }
   margin-bottom: 5.2rem;
 `;
 const StarIcon = styled(Star)`
-  width: 8rem;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 8rem;
+  }
   height: 7.6rem;
   cursor: pointer;
 `;
 const EmptyStarIcon = styled(EmptyStar)`
-  width: 8rem;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 8rem;
+  }
   height: 7.6rem;
   cursor: pointer;
 `;

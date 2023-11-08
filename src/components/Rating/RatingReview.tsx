@@ -7,7 +7,7 @@ export const RatingReview = () => {
   //별점 number
   const [starRating, setStarRating] = useState(0);
   const [review, setReview] = useState('');
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReview(e.target.value);
   };
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,14 +26,14 @@ export const RatingReview = () => {
     <RatingReviewContainer>
       <StarRate starRating={starRating} setStarRating={setStarRating} />
       <RatingText>리뷰 입력</RatingText>
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} className="form-review">
         <StyledTextArea
           value={review}
           onChange={handleOnChange}
           placeholder="(입력창)"
         />
         <Space />
-        <Button type="submit" width="41.7rem" height="5.7rem" fontSize="2.1rem">
+        <Button type="submit" width="100%" height="5.7rem" fontSize="2.1rem">
           제출하기
         </Button>
       </form>
@@ -42,6 +42,11 @@ export const RatingReview = () => {
 };
 const RatingReviewContainer = styled.div`
   margin-top: 4.8rem;
+  .form-review {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 const RatingText = styled.div`
   font-size: 2.1rem;
@@ -50,22 +55,32 @@ const RatingText = styled.div`
   margin-bottom: 0.7rem;
 `;
 const StyledTextArea = styled.textarea`
-  width: 38.7rem;
-  height: 24.3rem;
+  @media (max-width: 767px) {
+    width: 90%;
+    height: 12rem;
+  }
+  @media (min-width: 768px) {
+    width: 38.7rem;
+    height: 24.3rem;
+  }
   border: none;
   outline: none;
   background-color: #d9d9d9;
   border-radius: 3rem;
   resize: none;
   padding: 1.5rem;
-
   font-family: 'NanumGothic';
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   &::placeholder {
     font-weight: 400;
   }
 `;
 const Space = styled.div`
-  height: 11.5rem;
+  @media (max-width: 767px) {
+    height: 5rem;
+  }
+  @media (min-width: 768px) {
+    height: 24.3rem;
+  }
 `;

@@ -16,7 +16,7 @@ export const EmailInput = () => {
       <EmailInputText color={BK}>이메일 입력*</EmailInputText>
       <form onSubmit={handleOnSubmit}>
         <Input
-          width="41.7rem"
+          width="100%"
           height="6rem"
           fontSize="2.2rem"
           startPoint="2rem"
@@ -31,7 +31,7 @@ export const EmailInput = () => {
           서비스 이용을 위해 개인정보취급방침에 동의합니다.
         </TextRequest>
         <TextRequest className="price">상담사1/상담료: 5,000원</TextRequest>
-        <Button type="submit" width="41.7rem" height="5.7rem" fontSize="2.1rem">
+        <Button type="submit" width="100%" height="5.7rem" fontSize="2.1rem">
           결제하기
         </Button>
       </form>
@@ -41,8 +41,19 @@ export const EmailInput = () => {
 const EmailInputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 41.7rem;
+  }
   .agree {
-    margin-top: 21rem;
+    @media (max-width: 767px) {
+      margin-top: 10rem;
+    }
+    @media (min-width: 768px) {
+      margin-top: 21rem;
+    }
   }
   .price {
     margin-top: 5.7rem;
@@ -58,11 +69,12 @@ const EmailInputText = styled.div`
 const EmailDetailText = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  width: 39rem;
+  width: 100%;
   color: ${(props) => props.color};
   margin-top: 1.5rem;
 `;
 const TextRequest = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
+  width: 100%;
 `;
