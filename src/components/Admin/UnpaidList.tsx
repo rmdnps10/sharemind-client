@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import UnpaidItem from './UnpaidItem';
+import { unPaidList } from 'pages/AdminPage';
 interface UnpaidListProps {
   setIsVisibleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  unPaidList: unPaidList;
 }
-function UnpaidList({ setIsVisibleModal }: UnpaidListProps) {
+function UnpaidList({ setIsVisibleModal, unPaidList }: UnpaidListProps) {
   return (
     <UnpaidListContainer>
       <ListTitle>미결제 리스트</ListTitle>
@@ -12,12 +14,15 @@ function UnpaidList({ setIsVisibleModal }: UnpaidListProps) {
         <IndexDisplay>고객 이메일 | 상담사 이메일 | 신청일시</IndexDisplay>
         <IndexPayCheck> 결제확인 </IndexPayCheck>
       </IndexAllDisPlay>
-      <UnpaidItem
-        customerEmail="rmdnps10@gmail.com"
-        counselorEmail="rmdnps10@gmial.com"
-        date="2023-11-04"
-        setIsVisibleModal={setIsVisibleModal}
-      />
+      {unPaidList.map((item) => (
+        <UnpaidItem
+          customerEmail={item.customerEmail}
+          counselorEmail={item.counselorEmail}
+          date={item.date}
+          setIsVisibleModal={setIsVisibleModal}
+          key={item.id}
+        />
+      ))}
     </UnpaidListContainer>
   );
 }

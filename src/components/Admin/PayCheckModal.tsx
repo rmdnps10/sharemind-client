@@ -13,6 +13,7 @@ interface PayCheckModalProps {
 
 function PayCheckModal({ setIsVisibleModal }: PayCheckModalProps) {
   const onClickYesButton = () => {
+    // 서버로 클릭한 해당 id의 상담 결제확인했다고 전송
     setIsVisibleModal(false);
   };
   const onClickNoButton = () => {
