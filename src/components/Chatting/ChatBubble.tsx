@@ -49,6 +49,7 @@ const ChatSubject = styled.div`
 const ChatContent = styled.div`
   font-size: 1.7rem;
   margin-top: 1rem;
+  line-height: 140%;
 `;
 
 export default ChatBubble;
