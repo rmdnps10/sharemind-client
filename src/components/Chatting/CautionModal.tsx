@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 interface CautionModalProps {
   setIsCaution: any;
@@ -20,6 +19,7 @@ function CautionModal({
   isCustomer,
 }: CautionModalProps) {
   const onYesClick = () => {
+    // 백엔드 연결시 axios.post 코드 추가
     // 백엔드 연결시 axios.post 코드 추가
     setMessages((prev: any) => {
       if (isCustomer) {
@@ -53,7 +53,7 @@ function CautionModal({
 
 const ModalBox = styled.div`
   position: absolute;
-  top: 30rem;
+  top: 20rem;
   width: 90%;
   padding: 2rem 1rem;
   border-radius: 3rem;

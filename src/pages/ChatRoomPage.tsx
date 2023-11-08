@@ -35,7 +35,7 @@ const ChatRoomPage = () => {
   useEffect(() => {
     // 백엔드 연결시 axios.get 추가
     setName('정인영');
-    setIsCustomer(true);
+    setIsCustomer(false);
     setMessages({
       customer: ['안녕하세요', '흑흑 너무힘들엉'],
       counselor: ['조금만 더 힘내세요'],
@@ -67,6 +67,7 @@ const ChatRoomPage = () => {
       }
     }
     setIsActiveCounsel(true);
+    // eslint-disable-next-line
   }, [messages.customer.length, messages.counselor.length]);
 
   return (
