@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import UnpaidItem from './UnpaidItem';
-
-function UnpaidList() {
+interface UnpaidListProps {
+  setIsVisibleModal: any;
+}
+function UnpaidList({ setIsVisibleModal }: UnpaidListProps) {
   return (
     <UnpaidListContainer>
       <ListTitle>미결제 리스트</ListTitle>
@@ -14,6 +16,7 @@ function UnpaidList() {
         customerEmail="rmdnps10@gmail.com"
         counselorEmail="rmdnps10@gmial.com"
         date="2023-11-04"
+        setIsVisibleModal = {setIsVisibleModal}
       />
     </UnpaidListContainer>
   );

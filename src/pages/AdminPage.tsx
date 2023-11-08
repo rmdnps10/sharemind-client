@@ -8,13 +8,21 @@ import styled from 'styled-components';
 
 const AdminPage = () => {
   const [isCorrectPw, setIsCorrectPw] = useState<boolean>(false);
-  const [isVisibleModel, setIsVisibleModal] = useState<boolean>(false);
+  const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
 
   return (
     <AdminPageContainer>
       <HeaderText>ShardMind (admin)</HeaderText>
-      {isCorrectPw ? <UnpaidList /> : <PwAdminInput setIsCorrectPw = {setIsCorrectPw}/>}
-      {isVisibleModel ? <PayCheckModal /> : ''}
+      {isCorrectPw ? (
+        <UnpaidList setIsVisibleModal={setIsVisibleModal} />
+      ) : (
+        <PwAdminInput setIsCorrectPw={setIsCorrectPw} />
+      )}
+      {isVisibleModal ? (
+        <PayCheckModal setIsVisibleModal={setIsVisibleModal} />
+      ) : (
+        ''
+      )}
     </AdminPageContainer>
   );
 };

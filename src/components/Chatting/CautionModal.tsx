@@ -51,7 +51,7 @@ function CautionModal({
   );
 }
 
-const ModalBox = styled.div`
+export const ModalBox = styled.div`
   position: absolute;
   top: 20rem;
   width: 90%;
@@ -64,19 +64,19 @@ const ModalBox = styled.div`
   align-items: center;
 `;
 
-const CautionMessage = styled.div`
+export const CautionMessage = styled.div`
   width: 86%;
   font-size: 1.8rem;
 `;
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
   margin-top: 3rem;
   gap: 4rem;
 `;
-const YesButton = styled.button`
+export const YesButton = styled.button`
   font-size: 1.8rem;
   font-weight: 700;
 `;
 
-const NoButton = styled(YesButton)``;
+export const NoButton = styled(YesButton)``;
 export default CautionModal;

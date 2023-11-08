@@ -6,15 +6,24 @@ interface UnPaidItemProps {
   customerEmail: string;
   counselorEmail: string;
   date: string;
+  setIsVisibleModal: any;
 }
 
-function UnpaidItem({ customerEmail, counselorEmail, date }: UnPaidItemProps) {
+function UnpaidItem({
+  customerEmail,
+  counselorEmail,
+  date,
+  setIsVisibleModal,
+}: UnPaidItemProps) {
+  const onClickCheckButton = () => {
+    setIsVisibleModal(true);
+  };
   return (
     <UnpaidCounselInform>
       <CustomerEmail>{customerEmail}</CustomerEmail>
       <CounselorEmail>{counselorEmail}</CounselorEmail>
       <ApplyDate>{date}</ApplyDate>
-      <CheckButton>확인하기</CheckButton>
+      <CheckButton onClick={onClickCheckButton}>확인하기</CheckButton>
     </UnpaidCounselInform>
   );
 }
