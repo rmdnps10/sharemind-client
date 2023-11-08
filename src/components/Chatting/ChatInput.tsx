@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useCallback } from 'react';
 interface ChatInputProps {
   setIsCaution: any;
   setInputText: any;
   inputText: string;
   isActiveInput: boolean | undefined;
+  isActiveCounsel: boolean | undefined;
   isCaution: boolean | undefined;
 }
 function ChatInput({
@@ -13,6 +12,7 @@ function ChatInput({
   inputText,
   setInputText,
   isActiveInput,
+  isActiveCounsel,
   isCaution,
 }: ChatInputProps) {
   const textChange = (e: any) => {
@@ -33,7 +33,9 @@ function ChatInput({
           placeholder={
             isActiveInput
               ? '상담을 받을 내용을 입력해주세요.'
-              : '상담 내용 전송이 완료되었습니다'
+              : isActiveCounsel
+              ? ''
+              : '종료된 상담입니다.'
           }
           disabled={!isActiveInput}
         />
