@@ -14,8 +14,8 @@ export const PwInput = () => {
     <PwInputContainer>
       <form onSubmit={handleOnSubmit}>
         <Input
-          width="41.7rem"
-          height="7.4rem"
+          width="100%"
+          height="6.4rem"
           fontSize="2.2rem"
           startPoint="2rem"
           value={input}
@@ -28,4 +28,10 @@ export const PwInput = () => {
 const PwInputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 41.7rem;
+  }
 `;

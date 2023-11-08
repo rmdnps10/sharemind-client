@@ -33,4 +33,10 @@ const PaymentContentContainer = styled.div`
 const ContentText = styled.div`
   font-size: 2.1rem;
   font-weight: 700;
+  @media (max-width: 767px) {
+    font-size: 1.8rem;
+  }
+  @media (min-width: 768px) {
+    font-size: 2.1rem;
+  }
 `;

@@ -3,6 +3,7 @@ import { normalize } from 'styled-normalize';
 import NanumGothicBold from '../assets/fonts/NanumGothic-Bold.ttf';
 import NanumGothicRegular from '../assets/fonts/NanumGothic-Regular.ttf';
 import NanumGothicExtraBold from '../assets/fonts/NanumGothic-ExtraBold.ttf';
+
 function setScreenSize() {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`); //"--vh"라는 속성으로 정의해준다.
