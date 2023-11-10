@@ -49,7 +49,12 @@ const CounselorEmail = styled.div``;
 const ApplyDate = styled.div``;
 
 const CheckButton = styled(SubmitButton)`
-  width: 5rem;
+  width: 6rem;
+  border-radius: 1rem;
+  @media (mix-width: 768px) {
+    width: 3rem;
+    font-size: 1rem;
+  }
 `;
 
 export default UnpaidItem;

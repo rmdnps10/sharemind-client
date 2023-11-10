@@ -10,7 +10,7 @@ function PwAdminInput({ setIsCorrectPw }: PwAdminInputProps) {
     setIsCorrectPw(true);
   };
   const [userInput, setUserInput] = useState<string>('');
-  const onTextChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
   return (
@@ -50,8 +50,9 @@ const PasswordField = styled.input`
 
 export const SubmitButton = styled.button`
   border-radius: 0.5rem;
-  width: 3rem;
-  height: 2rem;
+  width: 4rem;
+  height: 2.4rem;
+  font-size: 1.2rem;
   background: #117de0;
   display: flex;
   justify-content: center;
