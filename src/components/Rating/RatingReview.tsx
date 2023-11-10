@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { StarRate } from './StarRate';
-import { Button, Input } from 'components/Common';
+import { Button } from 'components/Common';
 
 export const RatingReview = () => {
   //별점 number
@@ -45,7 +45,6 @@ const RatingReviewContainer = styled.div`
   .form-review {
     display: flex;
     flex-direction: column;
-    align-items: start;
   }
 `;
 const RatingText = styled.div`

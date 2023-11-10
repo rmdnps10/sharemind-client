@@ -12,6 +12,7 @@ export const RatingHeader = () => {
 const RatingHeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 2.4rem;
 `;
 const HeaderText = styled.div`
