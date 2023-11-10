@@ -13,6 +13,5 @@ export default RatingPage;
 const RatingPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: start;
   margin: 3rem;
 `;

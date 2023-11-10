@@ -42,22 +42,12 @@ const StarRateContainer = styled.div`
   margin-bottom: 5.2rem;
 `;
 const StarIcon = styled(Star)`
-  @media (max-width: 767px) {
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    width: 8rem;
-  }
+  width: 8rem;
   height: 7.6rem;
   cursor: pointer;
 `;
 const EmptyStarIcon = styled(EmptyStar)`
-  @media (max-width: 767px) {
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    width: 8rem;
-  }
+  width: 8rem;
   height: 7.6rem;
   cursor: pointer;
 `;
