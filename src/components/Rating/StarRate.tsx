@@ -43,13 +43,11 @@ const StarRateContainer = styled.div`
 `;
 const StarIcon = styled(Star)`
   width: 8rem;
-
   height: 7.6rem;
   cursor: pointer;
 `;
 const EmptyStarIcon = styled(EmptyStar)`
   width: 8rem;
-
   height: 7.6rem;
   cursor: pointer;
 `;
