@@ -1,16 +1,25 @@
+import { instace } from 'api/axios';
 import { Button, Input } from 'components/Common';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { BK } from 'styles/color';
 export const EmailInput = () => {
+  const params = useParams();
   const [input, setInput] = useState('');
+  const navigate = useNavigate();
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setInput('');
+    instace.post('/consults', {
+      counselorId: params.counselorId,
+      email: input,
+    });
+    navigate('/payment');
   };
+
   return (
     <EmailInputContainer>
       <EmailInputText color={BK}>이메일 입력*</EmailInputText>
