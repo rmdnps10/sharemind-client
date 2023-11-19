@@ -174,6 +174,6 @@ const ScrollContainer = styled.div`
 
 const ScrollSpace = styled.div`
   width: 100px;
-  height: 220px;
+  height: 420px;
 `;
 export default ChatRoomPage;
