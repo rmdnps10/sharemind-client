@@ -24,6 +24,7 @@ function ChatInput({
   const textSubmit = () => {
     setIsCaution(true);
   };
+  console.log(isActiveInput);
   return (
     <ChatInputWrapper>
       <ChatInputBox>
@@ -50,13 +51,14 @@ function ChatInput({
 const ChatInputWrapper = styled.div`
   @media (max-width: 767px) {
     width: 86%;
+    bottom: 1rem;
   }
   @media (min-width: 768px) {
     width: 42rem;
+    bottom: 3rem;
   }
 
   position: fixed;
-  bottom: 4rem;
   display: flex;
   justify-content: center;
 `;
@@ -66,6 +68,7 @@ const ChatInputBox = styled.div`
   height: 3rem;
   border-radius: 4rem;
   background: rgba(217, 217, 217, 1);
+  height: 100px;
   padding: 1rem;
   gap: 1rem;
   display: flex;
@@ -74,7 +77,10 @@ const ChatInputBox = styled.div`
 `;
 const StyledInput = styled.textarea<{ value: string }>`
   width: 65%;
-  height: 1.7rem;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+  align-self: flex-start;
   @media (max-width: 767px) {
     font-size: 1.4rem;
   }
@@ -86,8 +92,16 @@ const StyledInput = styled.textarea<{ value: string }>`
   border: none;
 `;
 const SubmitButton = styled.button<{ $isActive: boolean | undefined }>`
-  font-size: 1.7rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  display: flex;
+  padding: 1.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  height: 70%;
   visibility: ${(props) => (props.$isActive ? 'visible' : 'hidden')};
 `;
 

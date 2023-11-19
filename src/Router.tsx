@@ -10,12 +10,12 @@ const Router = () => {
   return (
     <>
       <Routes>
-        <Route path="/request" element={<RequestPage />} />
+        <Route path="/request/:counselorid" element={<RequestPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/counselLink" element={<CounselLinkPage />} />
         <Route path="/rating" element={<RatingPage />} />
-        <Route path="/chat" element={<ChatRoomPage/>}></Route>
-        <Route path="/admin" element={<AdminPage/>}></Route>
+        <Route path="/chat" element={<ChatRoomPage />}></Route>
+        <Route path="/admin" element={<AdminPage />}></Route>
       </Routes>
     </>
   );

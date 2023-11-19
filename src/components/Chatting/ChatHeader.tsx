@@ -24,12 +24,11 @@ function ChatHeader({ name, isVisibleIntro }: ChatHeaderProps) {
 }
 
 const HeaderInform = styled.div`
-  margin-top: 1rem;
+  margin: 1rem 0rem;
   font-size: 1.8rem;
 `;
 
 const HeaderIntroduction = styled.div`
-  margin-top: 10rem;
   font-size: 1.8rem;
   line-height: 2.3rem;
 `;
