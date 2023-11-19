@@ -40,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-size:10px;
     box-sizing: border-box;
+    background-color: #f5f5f5;
   }
   /*app 가운데 정렬*/
   body {
@@ -49,6 +50,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-box-pack: center;
     justify-content: center;
     margin: 0px;
+    
   }
   #root{
     height: calc(var(--vh, 1vh) * 100);

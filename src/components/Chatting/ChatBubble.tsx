@@ -48,6 +48,9 @@ const ChatSubject = styled.div`
 `;
 const ChatContent = styled.div`
   font-size: 1.7rem;
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
   margin-top: 1rem;
   line-height: 140%;
 `;

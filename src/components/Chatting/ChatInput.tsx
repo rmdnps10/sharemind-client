@@ -51,13 +51,14 @@ function ChatInput({
 const ChatInputWrapper = styled.div`
   @media (max-width: 767px) {
     width: 86%;
+    bottom: 1rem;
   }
   @media (min-width: 768px) {
     width: 42rem;
+    bottom: 3rem;
   }
 
   position: fixed;
-  bottom: 3rem;
   display: flex;
   justify-content: center;
 `;
@@ -91,8 +92,16 @@ const StyledInput = styled.textarea<{ value: string }>`
   border: none;
 `;
 const SubmitButton = styled.button<{ $isActive: boolean | undefined }>`
-  font-size: 1.7rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  display: flex;
+  padding: 1.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  height: 70%;
   visibility: ${(props) => (props.$isActive ? 'visible' : 'hidden')};
 `;
 

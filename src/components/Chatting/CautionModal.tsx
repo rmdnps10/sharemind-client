@@ -66,6 +66,7 @@ export const ModalBox = styled.div`
 
 export const CautionMessage = styled.div`
   width: 86%;
+  line-height: 140%;
   font-size: 1.8rem;
 `;
 export const ButtonWrapper = styled.div`
