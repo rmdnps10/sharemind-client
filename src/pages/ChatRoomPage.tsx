@@ -35,13 +35,16 @@ const ChatRoomPage = () => {
   useEffect(() => {
     // 백엔드 연결시 axios.get 추가
     setName('정인영');
-    setIsCustomer(false);
+    setIsCustomer(true);
     setMessages({
       customer: [
         '지난달 6일 국회 본회의에서 이균용 전 대법원장 후보자의 임명동의안이 부결된 지 약 한 달 만입니다.김대기 비서실장은 조 후보자에 대해 법관으로서 국민이 재판받을 권리를 보장하는데 평생을 헌신했다면서 대법관으로서 원칙론자로 정평이 났으며 사회적 약자와 소수자 권리보호에 앞장서 왔다고 전했습니다.1957년생인 조 후보자는 만 70세까지인 대법원장 정년 규정상 임기 6년을 다 채우지 못할 전망입니다그럼에도 조 후보자를 지명한 이유에 대해 대통령실 고위관계자는 대법원장 공백 사태가 오래되면 안 된다. 국회를 통과하는 부분에 신경을 많이 썼다고 밝혔습니다.      대법원장은 대통령이 지명하면 국회 인사청문회와 본회의 표결 절차를 거쳐 최종 임명되는데, 국회의 동의를 얻어야 합니다.',
       ],
       counselor: ['조금만 더 힘내세요'],
     });
+    console.log(messages.customer.length);
+    console.log(messages.counselor.length);
+    console.log(messages);
     setIsVisibleIntro(false);
     if (isCustomer) {
       if (messages.counselor.length === 0 && messages.customer.length === 0) {
@@ -50,6 +53,7 @@ const ChatRoomPage = () => {
         messages.counselor.length === 1 &&
         messages.customer.length === 1
       ) {
+        console.log('here?');
         setIsActiveInput(true);
       } else {
         setIsActiveInput(false);
@@ -70,7 +74,7 @@ const ChatRoomPage = () => {
     }
     setIsActiveCounsel(true);
     // eslint-disable-next-line
-  }, [messages.customer.length, messages.counselor.length]);
+  }, [messages.customer.length, messages.counselor.length, isActiveInput]);
 
   return (
     <ChatRoomPageContainer>

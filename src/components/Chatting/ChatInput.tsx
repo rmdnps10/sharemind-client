@@ -24,6 +24,7 @@ function ChatInput({
   const textSubmit = () => {
     setIsCaution(true);
   };
+  console.log(isActiveInput);
   return (
     <ChatInputWrapper>
       <ChatInputBox>
@@ -56,7 +57,7 @@ const ChatInputWrapper = styled.div`
   }
 
   position: fixed;
-  bottom: 4rem;
+  bottom: 3rem;
   display: flex;
   justify-content: center;
 `;
@@ -66,6 +67,7 @@ const ChatInputBox = styled.div`
   height: 3rem;
   border-radius: 4rem;
   background: rgba(217, 217, 217, 1);
+  height: 100px;
   padding: 1rem;
   gap: 1rem;
   display: flex;
@@ -74,7 +76,10 @@ const ChatInputBox = styled.div`
 `;
 const StyledInput = styled.textarea<{ value: string }>`
   width: 65%;
-  height: 1.7rem;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+  align-self: flex-start;
   @media (max-width: 767px) {
     font-size: 1.4rem;
   }
