@@ -19,7 +19,7 @@ export const PwInput = () => {
           password: input,
         },
       );
-      navigate('/chat', { state: res.data });
+      navigate('/chat', { state: { data: res.data, password: input } });
     } catch (err) {
       alert('비밀번호를 잘못 입력했습니다');
     }
