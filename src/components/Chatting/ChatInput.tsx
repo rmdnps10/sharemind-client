@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 interface ChatInputProps {
   setIsCaution: any;
@@ -24,7 +25,7 @@ function ChatInput({
   const textSubmit = () => {
     setIsCaution(true);
   };
-  console.log(isActiveInput);
+  
   return (
     <ChatInputWrapper>
       <ChatInputBox>

@@ -4,7 +4,10 @@ export const PaymentContent = () => {
   return (
     <PaymentContentContainer>
       <ContentText className="open-kakao">
-        오픈채팅 링크 https://open.kakao.com/o/sVv1nvQf
+        오픈채팅 링크{' '}
+        <a href="https://open.kakao.com/o/sVv1nvQf" target="_blank">
+          https://open.kakao.com/o/sVv1nvQf
+        </a>
         <br />
         <br />
         <br />

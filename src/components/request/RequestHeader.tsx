@@ -7,7 +7,7 @@ export const RequestHeader = () => {
     <RequestHeaderContainer>
       <HeaderText>ShareMind</HeaderText>
       <HeaderSubText>
-        상담사{params.counselorid}님의 상담을 신청합니다.
+        상담사{params.counselorId}님의 상담을 신청합니다.
       </HeaderSubText>
     </RequestHeaderContainer>
   );
