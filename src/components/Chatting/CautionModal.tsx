@@ -1,3 +1,4 @@
+import { instace } from 'api/axios';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 interface CautionModalProps {
@@ -8,7 +9,7 @@ interface CautionModalProps {
   setIsActiveInput: any;
   setIsVisibleIntro: any;
   isCustomer: boolean | undefined;
-  isActiveInput: boolean;
+  consultId: any;
 }
 
 function CautionModal({
@@ -19,7 +20,7 @@ function CautionModal({
   setIsActiveInput,
   setIsVisibleIntro,
   isCustomer,
-  isActiveInput,
+  consultId,
 }: CautionModalProps) {
   const onYesClick = () => {
     setMessages((prev: any) => {
@@ -28,6 +29,12 @@ function CautionModal({
       } else {
         return { ...prev, customer: [...prev.counselor, inputText] };
       }
+    });
+    // consultId??는 뭐지??
+    instace.post('/messages', {
+      consultId: consultId,
+      isCustomer: isCustomer,
+      content: inputText,
     });
     setInputText('');
     setIsCaution(false);
