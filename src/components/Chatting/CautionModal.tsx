@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 interface CautionModalProps {
   setIsCaution: any;
@@ -7,6 +8,7 @@ interface CautionModalProps {
   setIsActiveInput: any;
   setIsVisibleIntro: any;
   isCustomer: boolean | undefined;
+  isActiveInput: boolean;
 }
 
 function CautionModal({
@@ -17,10 +19,9 @@ function CautionModal({
   setIsActiveInput,
   setIsVisibleIntro,
   isCustomer,
+  isActiveInput,
 }: CautionModalProps) {
   const onYesClick = () => {
-    // 백엔드 연결시 axios.post 코드 추가
-    // 백엔드 연결시 axios.post 코드 추가
     setMessages((prev: any) => {
       if (isCustomer) {
         return { ...prev, customer: [...prev.customer, inputText] };

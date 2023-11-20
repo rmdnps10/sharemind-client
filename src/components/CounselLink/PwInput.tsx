@@ -12,14 +12,17 @@ export const PwInput = () => {
   const onClickPasswordCheck = async () => {
     // consult uuid 테스트용, 실제론 백엔드에서 메일로 링크를 쏴주기에,
     // useParmas써서 parmas.uuid 이런식으로 받아오면 될듯하다
-    const res = await instace.post(
-      '/consults/f2de38ac-8173-4cc5-aeb2-e04eaf94bdbc',
-      {
-        password: input,
-      },
-    );
-
-    navigate('/chat', { state: res.data });
+    try {
+      const res = await instace.post(
+        '/consults/f2de38ac-8173-4cc5-aeb2-e04eaf94bdbc',
+        {
+          password: input,
+        },
+      );
+      navigate('/chat', { state: res.data });
+    } catch (err) {
+      alert('비밀번호를 잘못 입력했습니다');
+    }
   };
 
   return (
