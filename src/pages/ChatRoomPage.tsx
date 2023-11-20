@@ -60,18 +60,18 @@ const ChatRoomPage = () => {
       setIsVisibleIntro(false);
       if (isCustomer) {
         setUserName(res.data.customerNickname);
-        if (customerContent.length === 0 && counselorContent.length === 0) {
+        if (messages.customer.length === 0 && messages.counselor.length === 0) {
           setIsActiveInput(true);
         } else if (
-          customerContent.length === 1 &&
-          counselorContent.length === 1
+          messages.customer.length === 1 &&
+          messages.counselor.length === 1
         ) {
           setIsActiveInput(true);
         } else {
           setIsActiveInput(false);
         }
       } else {
-        setCounselorName(state.data.counselorNickname);
+        setCounselorName(res.data.counselorNickname);
         if (messages.counselor.length === 0 && messages.customer.length === 1) {
           setIsActiveInput(true);
         } else if (
@@ -87,8 +87,9 @@ const ChatRoomPage = () => {
       // 상담 종료 여부도 통신해야하자않나?
       setIsActiveCounsel(true);
     };
+
     getChatData();
-  }, []);
+  }, [isActiveCounsel, isVisibleIntro, isActiveInput]);
 
   return (
     <ChatRoomPageContainer>
