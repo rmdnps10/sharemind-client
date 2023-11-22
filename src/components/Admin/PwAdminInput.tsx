@@ -11,12 +11,12 @@ function PwAdminInput({ setIsCorrectPw }: PwAdminInputProps) {
   const onSubmitButtonClick = async () => {
     // userInput과 비밀번호가 같은지 확인, 다르면 다르다고 알림
     try {
-      // 여기에 적절한 엔드포인트와 파라미터를 사용하여 GET 요청을 보냅니다.
       const response = await instace.get('/admins/', {
         params: {
           password: userInput,
         },
       });
+      //여기서 맞으면 true 로해주고 set List props로 넘겨서 여기서 set 해주기
       console.log(response.data);
       setIsCorrectPw(true);
     } catch (error) {

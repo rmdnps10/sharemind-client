@@ -19,8 +19,6 @@ const AdminPage = () => {
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
 
   const [unpaidList, setUnPaidList] = useState<unPaidList>([]);
-  //비밀번호 input
-  const [userInput, setUserInput] = useState<string>('');
   const dummyList = [
     {
       customerEmail: 'rmdnps10@gmail.com',
@@ -36,15 +34,15 @@ const AdminPage = () => {
     },
   ];
 
-  useEffect(() => {
-    //후에 백엔드 연동
-    const getData = async () => {
-      try {
-        instace.get('/admins');
-      } catch {}
-    };
-    setUnPaidList(dummyList);
-  }, []);
+  // useEffect(() => {
+  //   //후에 백엔드 연동
+  //   const getData = async () => {
+  //     try {
+  //       instace.get('/admins');
+  //     } catch {}
+  //   };
+  //   setUnPaidList(dummyList);
+  // }, []);
 
   return (
     <AdminPageContainer>
