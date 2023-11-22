@@ -12,9 +12,9 @@ const Router = () => {
       <Routes>
         <Route path="/request/:counselorId" element={<RequestPage />} />
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/counselLink" element={<CounselLinkPage />} />
+        <Route path="/counselLink/:uuid" element={<CounselLinkPage />} />
         <Route path="/rating/:uuid" element={<RatingPage />} />
-        <Route path="/chat" element={<ChatRoomPage />}></Route>
+        <Route path="/chat/:uuid" element={<ChatRoomPage />}></Route>
         <Route path="/admin" element={<AdminPage />}></Route>
       </Routes>
     </>

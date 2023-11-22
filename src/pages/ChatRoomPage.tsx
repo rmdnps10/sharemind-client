@@ -4,7 +4,7 @@ import ChatBubble from 'components/Chatting/ChatBubble';
 import ChatHeader from 'components/Chatting/ChatHeader';
 import ChatInput from 'components/Chatting/ChatInput';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface messages {
@@ -14,8 +14,7 @@ interface messages {
 
 const ChatRoomPage = () => {
   const location = useLocation();
-  const { state } = location;
-  const { password } = state;
+  const params = useParams();
   // 고객인지, 상담사인지여부에 따라 랜더링 여부 다르게
   const [isCustomer, setIsCustomer] = useState<boolean>();
   // 경고 모달창 띄울지
@@ -34,58 +33,71 @@ const ChatRoomPage = () => {
   const [counselorName, setCounselorName] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [inputText, setInputText] = useState('');
+  const [consultid, setConsultid] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getChatData = async () => {
-      const res = await instace.post(
-        '/consults/f2de38ac-8173-4cc5-aeb2-e04eaf94bdbc',
-        {
+      try {
+        const { state } = location;
+        const { password } = state;
+        const res = await instace.post('/consults/', {
           password: password,
-        },
-      );
-
-      setIsCustomer(res.data.loginByCustomer);
-      const customerMessages = res.data.messageResponses.filter(
-        (item: any) => item.isCustomer === true,
-      );
-      const userMessages = res.data.messageResponses.filter(
-        (item: any) => item.isCustomer === false,
-      );
-      const customerContent = customerMessages.map((item: any) => item.content);
-      const counselorContent = userMessages.map((item: any) => item.content);
-      setMessages({
-        customer: customerContent,
-        counselor: counselorContent,
-      });
-      setIsVisibleIntro(false);
-      if (isCustomer) {
-        setUserName(res.data.customerNickname);
-        if (messages.customer.length === 0 && messages.counselor.length === 0) {
-          setIsActiveInput(true);
-        } else if (
-          messages.customer.length === 1 &&
-          messages.counselor.length === 1
-        ) {
-          setIsActiveInput(true);
+        });
+        setConsultid(res.data.consultId);
+        setIsCustomer(res.data.loginByCustomer);
+        const customerMessages = res.data.messageResponses.filter(
+          (item: any) => item.isCustomer === true,
+        );
+        const userMessages = res.data.messageResponses.filter(
+          (item: any) => item.isCustomer === false,
+        );
+        const customerContent = customerMessages.map(
+          (item: any) => item.content,
+        );
+        const counselorContent = userMessages.map((item: any) => item.content);
+        setMessages({
+          customer: customerContent,
+          counselor: counselorContent,
+        });
+        setIsVisibleIntro(false);
+        if (isCustomer) {
+          setUserName(res.data.customerNickname);
+          if (
+            messages.customer.length === 0 &&
+            messages.counselor.length === 0
+          ) {
+            setIsActiveInput(true);
+          } else if (
+            messages.customer.length === 1 &&
+            messages.counselor.length === 1
+          ) {
+            setIsActiveInput(true);
+          } else {
+            setIsActiveInput(false);
+          }
         } else {
-          setIsActiveInput(false);
+          setCounselorName(res.data.counselorNickname);
+          if (
+            messages.counselor.length === 0 &&
+            messages.customer.length === 1
+          ) {
+            setIsActiveInput(true);
+          } else if (
+            messages.counselor.length === 1 &&
+            messages.customer.length === 2
+          ) {
+            setIsActiveInput(true);
+          } else {
+            setIsActiveInput(false);
+            // 만약에 채팅방의 상담 환불 여부, 상담 종료 여부가 true일 경우 : setIsActiveCounsel(false).
+          }
         }
-      } else {
-        setCounselorName(res.data.counselorNickname);
-        if (messages.counselor.length === 0 && messages.customer.length === 1) {
-          setIsActiveInput(true);
-        } else if (
-          messages.counselor.length === 1 &&
-          messages.customer.length === 2
-        ) {
-          setIsActiveInput(true);
-        } else {
-          setIsActiveInput(false);
-          // 만약에 채팅방의 상담 환불 여부, 상담 종료 여부가 true일 경우 : setIsActiveCounsel(false).
-        }
+        // 상담 종료 여부도 통신해야하자않나?
+        setIsActiveCounsel(true);
+      } catch (err) {
+        navigate(`/counselLink/${params.uuid}`);
       }
-      // 상담 종료 여부도 통신해야하자않나?
-      setIsActiveCounsel(true);
     };
 
     getChatData();
