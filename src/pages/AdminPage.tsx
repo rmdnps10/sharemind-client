@@ -55,11 +55,7 @@ const AdminPage = () => {
           setIsVisibleModal={setIsVisibleModal}
         />
       ) : (
-        <PwAdminInput
-          setIsCorrectPw={setIsCorrectPw}
-          userInput={userInput}
-          setUserInput={setUserInput}
-        />
+        <PwAdminInput setIsCorrectPw={setIsCorrectPw} />
       )}
       {isVisibleModal ? (
         <PayCheckModal setIsVisibleModal={setIsVisibleModal} />

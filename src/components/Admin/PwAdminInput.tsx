@@ -1,18 +1,28 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-
+import { instace } from 'api/axios';
 interface PwAdminInputProps {
   setIsCorrectPw: React.Dispatch<React.SetStateAction<boolean>>;
-  userInput: string;
-  setUserInput: React.Dispatch<React.SetStateAction<string>>;
 }
-function PwAdminInput({
-  setIsCorrectPw,
-  userInput,
-  setUserInput,
-}: PwAdminInputProps) {
-  const onSubmitButtonClick = () => {
+function PwAdminInput({ setIsCorrectPw }: PwAdminInputProps) {
+  //비밀번호 input
+  const [userInput, setUserInput] = useState<string>('');
+
+  const onSubmitButtonClick = async () => {
     // userInput과 비밀번호가 같은지 확인, 다르면 다르다고 알림
-    setIsCorrectPw(true);
+    try {
+      // 여기에 적절한 엔드포인트와 파라미터를 사용하여 GET 요청을 보냅니다.
+      const response = await instace.get('/admins/', {
+        params: {
+          password: userInput,
+        },
+      });
+      console.log(response.data);
+      setIsCorrectPw(true);
+    } catch (error) {
+      console.error('Error during GET request:', error);
+      setIsCorrectPw(false);
+    }
   };
 
   const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
