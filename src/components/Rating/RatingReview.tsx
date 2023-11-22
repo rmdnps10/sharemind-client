@@ -1,18 +1,68 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { StarRate } from './StarRate';
 import { Button } from 'components/Common';
-
-export const RatingReview = () => {
+import { instace } from 'api/axios';
+import { useNavigate } from 'react-router-dom';
+interface patchReviewBody {
+  reviewUuid: string;
+  rating?: number;
+  comment?: string;
+}
+interface ratingReviewProps {
+  uuid?: string;
+}
+export const RatingReview = ({ uuid }: ratingReviewProps) => {
+  //isValid
+  const [isValid, setIsValid] = useState(true);
   //별점 number
   const [starRating, setStarRating] = useState(0);
   const [review, setReview] = useState('');
+  //submit 시 여러번 클릭 못하게 펜딩
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReview(e.target.value);
   };
+  useEffect(() => {
+    // uuid 바뀌면 먼저 해당 uuid가 valid한지 판단, 유효하지 않을경우 예외처리
+    console.log('UUID:', uuid);
+    const getValidReview = async () => {
+      try {
+        const response = await instace.get(`/reviews/${uuid}`);
+        console.log('valid');
+      } catch (error) {
+        setIsValid(false);
+        console.error('Error updating review:', error);
+      }
+    };
+    getValidReview();
+  }, [uuid]);
+  // submit 시 보내기
+  // const patchReview = async () => {
+  //   try {
+  //     setIsSubmitting(true);
+  //     //body 세팅
+  //     const reviewBody: patchReviewBody = {
+  //       reviewUuid: uuid, //리뷰의 UUID로 변경
+  //       rating: starRating,
+  //       comment: review,
+  //     };
+  //     // axios를 사용하여 PATCH 요청 보내기
+  //     await instace.patch('/reviews/', reviewBody);
+  //     setReview('');
+  //     setStarRating(0);
+  //   } catch (error) {
+  //     console.error('Error updating review:', error);
+  //     // 에러 처리 로직 추가
+  //     alert('리뷰 정보를 찾을 수 없습니다..');
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //여기서 post 처리
+
     if (starRating === 0) {
       alert('별점을 입력해주세요.');
     } else if (review.trim() === '') {
@@ -22,23 +72,30 @@ export const RatingReview = () => {
       setStarRating(0);
     }
   };
-  return (
+  if (isValid === true) {
+    return (
+      <RatingReviewContainer>
+        <StarRate starRating={starRating} setStarRating={setStarRating} />
+        <RatingText>리뷰 입력</RatingText>
+        <form onSubmit={handleOnSubmit} className="form-review">
+          <StyledTextArea
+            value={review}
+            onChange={handleOnChange}
+            placeholder="(입력창)"
+          />
+          <Space />
+          <Button type="submit" width="100%" height="5.7rem" fontSize="2.1rem">
+            제출하기
+          </Button>
+        </form>
+      </RatingReviewContainer>
+    );
+  } else {
     <RatingReviewContainer>
       <StarRate starRating={starRating} setStarRating={setStarRating} />
       <RatingText>리뷰 입력</RatingText>
-      <form onSubmit={handleOnSubmit} className="form-review">
-        <StyledTextArea
-          value={review}
-          onChange={handleOnChange}
-          placeholder="(입력창)"
-        />
-        <Space />
-        <Button type="submit" width="100%" height="5.7rem" fontSize="2.1rem">
-          제출하기
-        </Button>
-      </form>
-    </RatingReviewContainer>
-  );
+    </RatingReviewContainer>;
+  }
 };
 const RatingReviewContainer = styled.div`
   margin-top: 4.8rem;
@@ -80,6 +137,6 @@ const Space = styled.div`
     height: 5rem;
   }
   @media (min-width: 768px) {
-    height: 24.3rem;
+    height: 15.3rem;
   }
 `;
