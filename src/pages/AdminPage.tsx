@@ -1,3 +1,4 @@
+import { instace } from 'api/axios';
 import PayCheckModal from 'components/Admin/PayCheckModal';
 import PwAdminInput from 'components/Admin/PwAdminInput';
 import UnpaidList from 'components/Admin/UnpaidList';
@@ -18,7 +19,8 @@ const AdminPage = () => {
   const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
 
   const [unpaidList, setUnPaidList] = useState<unPaidList>([]);
-
+  //비밀번호 input
+  const [userInput, setUserInput] = useState<string>('');
   const dummyList = [
     {
       customerEmail: 'rmdnps10@gmail.com',
@@ -35,7 +37,12 @@ const AdminPage = () => {
   ];
 
   useEffect(() => {
-    //후에 백엔드 연동 
+    //후에 백엔드 연동
+    const getData = async () => {
+      try {
+        instace.get('/admins');
+      } catch {}
+    };
     setUnPaidList(dummyList);
   }, []);
 
@@ -48,7 +55,11 @@ const AdminPage = () => {
           setIsVisibleModal={setIsVisibleModal}
         />
       ) : (
-        <PwAdminInput setIsCorrectPw={setIsCorrectPw} />
+        <PwAdminInput
+          setIsCorrectPw={setIsCorrectPw}
+          userInput={userInput}
+          setUserInput={setUserInput}
+        />
       )}
       {isVisibleModal ? (
         <PayCheckModal setIsVisibleModal={setIsVisibleModal} />

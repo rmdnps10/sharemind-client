@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface PwAdminInputProps {
   setIsCorrectPw: React.Dispatch<React.SetStateAction<boolean>>;
+  userInput: string;
+  setUserInput: React.Dispatch<React.SetStateAction<string>>;
 }
-function PwAdminInput({ setIsCorrectPw }: PwAdminInputProps) {
+function PwAdminInput({
+  setIsCorrectPw,
+  userInput,
+  setUserInput,
+}: PwAdminInputProps) {
   const onSubmitButtonClick = () => {
     // userInput과 비밀번호가 같은지 확인, 다르면 다르다고 알림
     setIsCorrectPw(true);
   };
-  const [userInput, setUserInput] = useState<string>('');
+
   const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
