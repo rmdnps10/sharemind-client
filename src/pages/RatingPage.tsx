@@ -2,7 +2,7 @@ import { RatingHeader, RatingReview } from 'components/Rating';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 const RatingPage = () => {
-  const { uuid } = useParams();
+  const { uuid } = useParams<{ uuid: string }>();
   return (
     <RatingPageContainer>
       <RatingHeader />

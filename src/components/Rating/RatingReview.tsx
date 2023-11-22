@@ -4,6 +4,7 @@ import { StarRate } from './StarRate';
 import { Button } from 'components/Common';
 import { instace } from 'api/axios';
 import { useNavigate } from 'react-router-dom';
+import { RatingHeader } from './RatingHeader';
 interface patchReviewBody {
   reviewUuid: string;
   rating?: number;
@@ -29,48 +30,49 @@ export const RatingReview = ({ uuid }: ratingReviewProps) => {
     const getValidReview = async () => {
       try {
         const response = await instace.get(`/reviews/${uuid}`);
-        console.log('valid');
+        // console.log('valid');
       } catch (error) {
         setIsValid(false);
-        console.error('Error updating review:', error);
+        // console.error('Error updating review:', error);
       }
     };
     getValidReview();
   }, [uuid]);
   // submit 시 보내기
-  // const patchReview = async () => {
-  //   try {
-  //     setIsSubmitting(true);
-  //     //body 세팅
-  //     const reviewBody: patchReviewBody = {
-  //       reviewUuid: uuid, //리뷰의 UUID로 변경
-  //       rating: starRating,
-  //       comment: review,
-  //     };
-  //     // axios를 사용하여 PATCH 요청 보내기
-  //     await instace.patch('/reviews/', reviewBody);
-  //     setReview('');
-  //     setStarRating(0);
-  //   } catch (error) {
-  //     console.error('Error updating review:', error);
-  //     // 에러 처리 로직 추가
-  //     alert('리뷰 정보를 찾을 수 없습니다..');
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    //여기서 post 처리
-
-    if (starRating === 0) {
-      alert('별점을 입력해주세요.');
-    } else if (review.trim() === '') {
-      alert('리뷰를 작성해주세요.');
-    } else {
+  const patchReview = async () => {
+    try {
+      setIsSubmitting(true);
+      //body 세팅
+      const reviewBody: patchReviewBody = {
+        reviewUuid: uuid || '', //리뷰의 UUID로 변경
+        rating: starRating,
+        comment: review,
+      };
+      // axios를 사용하여 PATCH 요청 보내기
+      await instace.patch(`/reviews/${uuid}`, reviewBody);
       setReview('');
       setStarRating(0);
+    } catch (error) {
+      // 에러 처리 로직 추가
+      alert('리뷰 정보를 찾을 수 없습니다.');
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isSubmitting) {
+      // 이미 요청 중인 경우 무시
+      return;
+    }
+    if (starRating === 0) {
+      alert('별점을 입력해주세요.');
+      return;
+    } else if (review.trim() === '') {
+      alert('리뷰를 작성해주세요.');
+      return;
+    }
+    patchReview();
   };
   if (isValid === true) {
     return (
@@ -91,10 +93,20 @@ export const RatingReview = ({ uuid }: ratingReviewProps) => {
       </RatingReviewContainer>
     );
   } else {
-    <RatingReviewContainer>
-      <StarRate starRating={starRating} setStarRating={setStarRating} />
-      <RatingText>리뷰 입력</RatingText>
-    </RatingReviewContainer>;
+    return (
+      <RatingReviewContainer>
+        <StarRate starRating={0} setStarRating={setStarRating} />
+        <RatingText>리뷰 입력</RatingText>
+        <form onSubmit={handleOnSubmit} className="form-review">
+          <StyledTextArea
+            value={review}
+            onChange={handleOnChange}
+            placeholder="유효하지 않은 review입니다"
+            readOnly
+          />
+        </form>
+      </RatingReviewContainer>
+    );
   }
 };
 const RatingReviewContainer = styled.div`
