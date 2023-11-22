@@ -1,28 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
 import { SubmitButton } from './PwAdminInput';
-
+import { useSetRecoilState } from 'recoil';
+import { clickedDeleteEmail, deleteConsultId } from 'utils/atom';
 interface UnPaidItemProps {
+  consultId: number;
   customerEmail: string;
   counselorEmail: string;
-  date: string;
+  createdAt: string;
   setIsVisibleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UnpaidItem({
+  consultId,
   customerEmail,
   counselorEmail,
-  date,
+  createdAt,
   setIsVisibleModal,
 }: UnPaidItemProps) {
+  const setDeleteCounsultId = useSetRecoilState(deleteConsultId);
+  const setClickedDeleteEmail = useSetRecoilState(clickedDeleteEmail);
   const onClickCheckButton = () => {
+    setDeleteCounsultId(consultId);
+    setClickedDeleteEmail(customerEmail);
     setIsVisibleModal(true);
   };
   return (
     <UnpaidCounselInform>
       <CustomerEmail>{customerEmail}</CustomerEmail>
       <CounselorEmail>{counselorEmail}</CounselorEmail>
-      <ApplyDate>{date}</ApplyDate>
+      <ApplyDate>{createdAt}</ApplyDate>
       <CheckButton onClick={onClickCheckButton}>확인하기</CheckButton>
     </UnpaidCounselInform>
   );

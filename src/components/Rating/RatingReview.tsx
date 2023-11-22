@@ -26,14 +26,12 @@ export const RatingReview = ({ uuid }: ratingReviewProps) => {
   };
   useEffect(() => {
     // uuid 바뀌면 먼저 해당 uuid가 valid한지 판단, 유효하지 않을경우 예외처리
-    // console.log('UUID:', uuid);
     const getValidReview = async () => {
       try {
         const response = await instace.get(`/reviews/${uuid}`);
         console.log('valid');
       } catch (error) {
         setIsValid(false);
-        // console.error('Error updating review:', error);
       }
     };
     getValidReview();

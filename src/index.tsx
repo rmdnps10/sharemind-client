@@ -3,17 +3,19 @@ import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import AppContainer from 'components/Common/AppContainer.tsx';
 import { GlobalStyle } from 'styles/GlobalStyle.ts';
-
+import { RecoilRoot } from 'recoil';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   //<React.StrictMode>
   <BrowserRouter>
-    <AppContainer>
-      <GlobalStyle />
-      <App />
-    </AppContainer>
+    <RecoilRoot>
+      <AppContainer>
+        <GlobalStyle />
+        <App />
+      </AppContainer>
+    </RecoilRoot>
   </BrowserRouter>,
   //</React.StrictMode>,
 );
