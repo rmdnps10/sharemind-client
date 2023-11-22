@@ -26,11 +26,11 @@ export const RatingReview = ({ uuid }: ratingReviewProps) => {
   };
   useEffect(() => {
     // uuid 바뀌면 먼저 해당 uuid가 valid한지 판단, 유효하지 않을경우 예외처리
-    console.log('UUID:', uuid);
+    // console.log('UUID:', uuid);
     const getValidReview = async () => {
       try {
         const response = await instace.get(`/reviews/${uuid}`);
-        // console.log('valid');
+        console.log('valid');
       } catch (error) {
         setIsValid(false);
         // console.error('Error updating review:', error);
@@ -49,7 +49,8 @@ export const RatingReview = ({ uuid }: ratingReviewProps) => {
         comment: review,
       };
       // axios를 사용하여 PATCH 요청 보내기
-      await instace.patch(`/reviews/${uuid}`, reviewBody);
+      await instace.patch('/reviews', reviewBody);
+      setIsValid(false);
       setReview('');
       setStarRating(0);
     } catch (error) {
