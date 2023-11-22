@@ -13,7 +13,7 @@ const Router = () => {
         <Route path="/request/:counselorId" element={<RequestPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/counselLink" element={<CounselLinkPage />} />
-        <Route path="/rating" element={<RatingPage />} />
+        <Route path="/rating/:uuid" element={<RatingPage />} />
         <Route path="/chat" element={<ChatRoomPage />}></Route>
         <Route path="/admin" element={<AdminPage />}></Route>
       </Routes>

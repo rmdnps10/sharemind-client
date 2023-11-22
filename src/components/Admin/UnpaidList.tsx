@@ -14,13 +14,14 @@ function UnpaidList({ setIsVisibleModal, unPaidList }: UnpaidListProps) {
         <IndexDisplay>고객 이메일 | 상담사 이메일 | 신청일시</IndexDisplay>
         <IndexPayCheck> 결제확인 </IndexPayCheck>
       </IndexAllDisPlay>
-      {unPaidList.map((item) => (
+      {unPaidList.map((item, index) => (
         <UnpaidItem
+          consultId={item.consultId}
           customerEmail={item.customerEmail}
           counselorEmail={item.counselorEmail}
-          date={item.date}
+          createdAt={item.createdAt}
           setIsVisibleModal={setIsVisibleModal}
-          key={item.id}
+          key={index}
         />
       ))}
     </UnpaidListContainer>

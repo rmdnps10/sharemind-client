@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-
+import { instace } from 'api/axios';
+import { unPaidList } from 'pages/AdminPage';
 interface PwAdminInputProps {
   setIsCorrectPw: React.Dispatch<React.SetStateAction<boolean>>;
+  setUnpaidList: React.Dispatch<React.SetStateAction<unPaidList>>;
 }
-function PwAdminInput({ setIsCorrectPw }: PwAdminInputProps) {
-  const onSubmitButtonClick = () => {
-    // userInput과 비밀번호가 같은지 확인, 다르면 다르다고 알림
-    setIsCorrectPw(true);
-  };
+function PwAdminInput({ setIsCorrectPw, setUnpaidList }: PwAdminInputProps) {
+  //비밀번호 input
   const [userInput, setUserInput] = useState<string>('');
+
+  const onSubmitButtonClick = async () => {
+    // userInput과 비밀번호가 같은지 확인, 다르면 다르다고 알림
+    try {
+      const response = await instace.get('/admins', {
+        params: {
+          password: userInput,
+        },
+      });
+      setUnpaidList(response.data);
+      setIsCorrectPw(true);
+    } catch (error) {
+      alert('비밀번호가 틀렸습니다.');
+      setIsCorrectPw(false);
+    }
+  };
+
   const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
