@@ -8,8 +8,16 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface messages {
-  customer: string[];
-  counselor: string[];
+  isCustomer: boolean;
+  content: string;
+  createdAt: string;
+}
+interface chatData {
+  consultId: number;
+  loginByCustomer: boolean;
+  customerNickname: string;
+  counselorNickname: string;
+  messageResponses: messages[];
 }
 
 const ChatRoomPage = () => {
@@ -36,7 +44,7 @@ const ChatRoomPage = () => {
   // 상담 종료 여부 (24시간 내 답장안하거나, 추가질문이 아예 끝난상태 , 상담이 종료되는 경우는
   const [isActiveCounsel, setIsActiveCounsel] = useState<boolean>();
 
-  const [chatData, setChatData] = useState();
+  const [chatData, setChatData] = useState<chatData>();
 
   useEffect(() => {
     const getChatData = async () => {

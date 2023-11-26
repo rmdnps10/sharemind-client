@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 interface ChatBubbleProps {
   text: string;
-  name: string;
+  name: string | undefined;
   isSubject: boolean;
-  isCustomer: boolean | undefined;
 }
 function ChatBubble({ text, isSubject, name }: ChatBubbleProps) {
   return (

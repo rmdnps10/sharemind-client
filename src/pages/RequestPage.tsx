@@ -1,4 +1,4 @@
-import { EmailInput, RequestHeader } from 'components/Request';
+import { EmailInput, RequestHeader } from 'components/request';
 import styled from 'styled-components';
 
 const RequestPage = () => {
