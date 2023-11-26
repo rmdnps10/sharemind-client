@@ -1,14 +1,22 @@
+import { instace } from 'api/axios';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 //나중에 상담사 번호가져오기
 export const RequestHeader = () => {
   const params = useParams();
+  const [nickName, setNickName] = useState('');
+  const fetchNickName = async () => {
+    const res = await instace.get(`/counselors/${params.counselorId}`);
+    setNickName(res.data.nickname);
+  };
+  useEffect(() => {
+    fetchNickName();
+  });
   return (
     <RequestHeaderContainer>
       <HeaderText>ShareMind</HeaderText>
-      <HeaderSubText>
-        상담사{params.counselorId}님의 상담을 신청합니다.
-      </HeaderSubText>
+      <HeaderSubText>{nickName}님의 상담을 신청합니다.</HeaderSubText>
     </RequestHeaderContainer>
   );
 };

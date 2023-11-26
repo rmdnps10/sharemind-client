@@ -6,6 +6,7 @@ interface ChatHeaderProps {
   isVisibleIntro: boolean | undefined;
 }
 function ChatHeader({ name, isVisibleIntro }: ChatHeaderProps) {
+  
   return (
     <>
       <HeaderText>ShareMind</HeaderText>

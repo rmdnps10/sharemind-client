@@ -15,98 +15,93 @@ interface messages {
 const ChatRoomPage = () => {
   const location = useLocation();
   const params = useParams();
+  const { state } = location;
+  const navigate = useNavigate();
+  try {
+    const { password } = state;
+  } catch (err) {
+    navigate(`/counselLink/${params.uuid}`);
+  }
+
   // 고객인지, 상담사인지여부에 따라 랜더링 여부 다르게
+  const [inputText, setInputText] = useState('');
+
   const [isCustomer, setIsCustomer] = useState<boolean>();
   // 경고 모달창 띄울지
   const [isCaution, setIsCaution] = useState<boolean>();
   // 인트로 띄울지
-  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>(true);
+  const [isVisibleIntro, setIsVisibleIntro] = useState<boolean>();
   // input 활성화 여부
   const [isActiveInput, setIsActiveInput] = useState<boolean>();
   // 상담 종료 여부 (24시간 내 답장안하거나, 추가질문이 아예 끝난상태 , 상담이 종료되는 경우는
   const [isActiveCounsel, setIsActiveCounsel] = useState<boolean>();
-  // 고객, 상담자의 메시지 상태
-  const [messages, setMessages] = useState<messages>({
-    customer: [''],
-    counselor: [''],
-  });
-  const [counselorName, setCounselorName] = useState<string>('');
-  const [userName, setUserName] = useState<string>('');
-  const [inputText, setInputText] = useState('');
-  const [consultid, setConsultid] = useState('');
-  const navigate = useNavigate();
+
+  const [chatData, setChatData] = useState();
 
   useEffect(() => {
     const getChatData = async () => {
       try {
-        const { state } = location;
-        const { password } = state;
-        const res = await instace.post('/consults/', {
-          password: password,
+        const res = await instace.post(`/consults/${params.uuid}`, {
+          password: state.password,
         });
-        setConsultid(res.data.consultId);
-        setIsCustomer(res.data.loginByCustomer);
-        const customerMessages = res.data.messageResponses.filter(
-          (item: any) => item.isCustomer === true,
-        );
-        const userMessages = res.data.messageResponses.filter(
-          (item: any) => item.isCustomer === false,
-        );
-        const customerContent = customerMessages.map(
-          (item: any) => item.content,
-        );
-        const counselorContent = userMessages.map((item: any) => item.content);
-        setMessages({
-          customer: customerContent,
-          counselor: counselorContent,
-        });
-        setIsVisibleIntro(false);
-        if (isCustomer) {
-          setUserName(res.data.customerNickname);
-          if (
-            messages.customer.length === 0 &&
-            messages.counselor.length === 0
-          ) {
+        setChatData(res.data);
+        const length = res.data.messageResponses.length;
+        if (res.data.loginByCustomer) {
+          if (length === 0) {
+            setIsActiveCounsel(true);
             setIsActiveInput(true);
-          } else if (
-            messages.customer.length === 1 &&
-            messages.counselor.length === 1
-          ) {
-            setIsActiveInput(true);
-          } else {
+            setIsVisibleIntro(true);
+          } else if (length === 1) {
+            setIsActiveCounsel(true);
             setIsActiveInput(false);
+            setIsVisibleIntro(false);
+          } else if (length === 2) {
+            setIsActiveInput(true);
+            setIsVisibleIntro(true);
+          } else if (length === 3) {
+            setIsActiveCounsel(true);
+            setIsActiveInput(false);
+            setIsVisibleIntro(false);
+          } else {
+            setIsActiveCounsel(false);
+            setIsActiveInput(false);
+            setIsVisibleIntro(false);
           }
         } else {
-          setCounselorName(res.data.counselorNickname);
-          if (
-            messages.counselor.length === 0 &&
-            messages.customer.length === 1
-          ) {
+          if (length === 0) {
+            setIsVisibleIntro(true);
+            setIsActiveCounsel(true);
+            setIsActiveInput(false);
+          } else if (length === 1) {
+            setIsVisibleIntro(false);
+            setIsActiveCounsel(true);
             setIsActiveInput(true);
-          } else if (
-            messages.counselor.length === 1 &&
-            messages.customer.length === 2
-          ) {
+          } else if (length == 2) {
+            setIsActiveInput(false);
+          } else if (length == 3) {
+            setIsActiveCounsel(true);
             setIsActiveInput(true);
+            setIsVisibleIntro(false);
           } else {
             setIsActiveInput(false);
-            // 만약에 채팅방의 상담 환불 여부, 상담 종료 여부가 true일 경우 : setIsActiveCounsel(false).
+            setIsActiveCounsel(false);
           }
         }
-        // 상담 종료 여부도 통신해야하자않나?
-        setIsActiveCounsel(true);
       } catch (err) {
         navigate(`/counselLink/${params.uuid}`);
       }
     };
 
     getChatData();
-  }, [isActiveCounsel, isVisibleIntro, isActiveInput]);
-
+  }, [chatData?.messageResponses?.length, isCaution]);
   return (
     <ChatRoomPageContainer>
       <ChatHeader
-        name={isCustomer ? counselorName : userName}
+        name={
+          chatData?.loginByCustomer
+            ? chatData?.counselorNickname
+            : chatData?.customerNickname
+        }
         isVisibleIntro={isVisibleIntro}
       />
       {isCaution ? (
@@ -114,58 +109,29 @@ const ChatRoomPage = () => {
           inputText={inputText}
           setInputText={setInputText}
           setIsCaution={setIsCaution}
-          setMessages={setMessages}
           setIsActiveInput={setIsActiveInput}
-          setIsVisibleIntro={setIsVisibleIntro}
-          isCustomer={isCustomer}
-          consultId={state.consultId}
+          isCustomer={chatData?.loginByCustomer}
+          consultId={chatData?.consultId}
         />
       ) : (
         ''
       )}
-
       <ChatBubbleContainer>
         <ScrollContainer>
-          {messages.customer.length > 0 ? (
+          {chatData?.messageResponses?.map((item) => (
             <ChatBubble
-              text={messages.customer[0]}
-              name={isCustomer ? counselorName : userName}
-              isSubject={isCustomer ? true : false}
-              isCustomer={isCustomer}
+              text={item.content}
+              name={
+                item.isCustomer
+                  ? chatData?.customerNickname
+                  : chatData?.counselorNickname
+              }
+              isSubject={
+                chatData?.loginByCustomer == item.isCustomer ? true : false
+              }
+              key={item.createdAt}
             />
-          ) : (
-            ''
-          )}
-          {messages.counselor.length > 0 ? (
-            <ChatBubble
-              text={messages.counselor[0]}
-              name={isCustomer ? counselorName : userName}
-              isSubject={isCustomer ? false : true}
-              isCustomer={isCustomer}
-            />
-          ) : (
-            ''
-          )}
-          {messages.customer.length > 1 ? (
-            <ChatBubble
-              text={messages.customer[1]}
-              name={isCustomer ? counselorName : userName}
-              isSubject={isCustomer ? true : false}
-              isCustomer={isCustomer}
-            />
-          ) : (
-            ''
-          )}
-          {messages.counselor.length > 1 ? (
-            <ChatBubble
-              text={messages.counselor[1]}
-              name={isCustomer ? counselorName : userName}
-              isSubject={isCustomer ? false : true}
-              isCustomer={isCustomer}
-            />
-          ) : (
-            ''
-          )}
+          ))}
           <ScrollSpace />
         </ScrollContainer>
       </ChatBubbleContainer>

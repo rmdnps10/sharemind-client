@@ -9,6 +9,7 @@ export const PwInput = () => {
     setInput(e.target.value);
   };
   const params = useParams();
+  console.log(params.uuid);
   const navigate = useNavigate();
   const onClickPasswordCheck = async () => {
     try {
@@ -19,7 +20,7 @@ export const PwInput = () => {
         state: { data: res.data, password: input },
       });
     } catch (err) {
-      alert('비밀번호를 잘못 입력했습니다');
+      alert('비밀번호를 잘못 입력했습니다.');
     }
   };
 

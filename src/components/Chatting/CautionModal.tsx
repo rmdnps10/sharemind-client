@@ -1,5 +1,5 @@
 import { instace } from 'api/axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 interface CautionModalProps {
   setIsCaution: any;
@@ -16,30 +16,33 @@ function CautionModal({
   inputText,
   setInputText,
   setIsCaution,
-  setMessages,
   setIsActiveInput,
-  setIsVisibleIntro,
   isCustomer,
   consultId,
 }: CautionModalProps) {
-  const onYesClick = () => {
-    setMessages((prev: any) => {
-      if (isCustomer) {
-        return { ...prev, customer: [...prev.customer, inputText] };
-      } else {
-        return { ...prev, customer: [...prev.counselor, inputText] };
-      }
-    });
-    // consultId??는 뭐지??
-    instace.post('/messages', {
-      consultId: consultId,
-      isCustomer: isCustomer,
-      content: inputText,
-    });
-    setInputText('');
-    setIsCaution(false);
-    setIsActiveInput(false);
-    setIsVisibleIntro(false);
+  const [isRequesting, setIsRequesting] = useState(false);
+  const onYesClick = async () => {
+    if (isRequesting) {
+      return;
+    }
+    try {
+      setIsRequesting(true);
+      // consultId??는 뭐지??
+      await instace.post('/messages', {
+        consultId: consultId,
+        isCustomer: isCustomer,
+        content: inputText,
+      });
+      setInputText('');
+      setIsCaution(false);
+      setIsActiveInput(false);
+    } catch (error) {
+      // 필요한 경우 에러 처리
+      console.error('에러:', error);
+    } finally {
+      // 요청이 완료되면 isRequesting을 다시 false로 설정
+      setIsRequesting(false);
+    }
   };
   const onNoClick = () => {
     setIsCaution(false);

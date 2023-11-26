@@ -7,27 +7,10 @@ interface ChatBubbleProps {
   isSubject: boolean;
   isCustomer: boolean | undefined;
 }
-function ChatBubble({ text, isSubject, isCustomer, name }: ChatBubbleProps) {
-  const [subject, setSubject] = useState('');
-  useEffect(() => {
-    if (isCustomer) {
-      if (isSubject) {
-        setSubject('나');
-      } else {
-        setSubject(name);
-      }
-    } else {
-      if (isSubject) {
-        setSubject(name);
-      } else {
-        setSubject('내담자');
-      }
-    }
-  }, [name]);
-
+function ChatBubble({ text, isSubject, name }: ChatBubbleProps) {
   return (
     <ChatBubbleContainer $isSubject={isSubject}>
-      <ChatSubject>{subject}</ChatSubject>
+      <ChatSubject>{name}</ChatSubject>
       <ChatContent>{text}</ChatContent>
     </ChatBubbleContainer>
   );
