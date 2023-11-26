@@ -1,27 +1,26 @@
 import { instace } from 'api/axios';
 import { Input } from 'components/Common';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 export const PwInput = () => {
   const [input, setInput] = useState('');
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
+  const params = useParams();
+  console.log(params.uuid);
   const navigate = useNavigate();
   const onClickPasswordCheck = async () => {
-    // consult uuid 테스트용, 실제론 백엔드에서 메일로 링크를 쏴주기에,
-    // useParmas써서 parmas.uuid 이런식으로 받아오면 될듯하다
     try {
-      const res = await instace.post(
-        '/consults/f2de38ac-8173-4cc5-aeb2-e04eaf94bdbc',
-        {
-          password: input,
-        },
-      );
-      navigate('/chat', { state: { data: res.data, password: input } });
+      const res = await instace.post(`/consults/${params.uuid}`, {
+        password: input,
+      });
+      navigate(`/chat/${params.uuid}`, {
+        state: { data: res.data, password: input },
+      });
     } catch (err) {
-      alert('비밀번호를 잘못 입력했습니다');
+      alert('비밀번호를 잘못 입력했습니다.');
     }
   };
 
