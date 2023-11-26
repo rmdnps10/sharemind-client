@@ -2,11 +2,10 @@ import { HeaderText } from 'components/CounselLink';
 import React from 'react';
 import styled from 'styled-components';
 interface ChatHeaderProps {
-  name: string;
+  name: string | undefined;
   isVisibleIntro: boolean | undefined;
 }
 function ChatHeader({ name, isVisibleIntro }: ChatHeaderProps) {
-  
   return (
     <>
       <HeaderText>ShareMind</HeaderText>
