@@ -9,7 +9,6 @@ export const PwInput = () => {
     setInput(e.target.value);
   };
   const params = useParams();
-  console.log(params.uuid);
   const navigate = useNavigate();
   const onClickPasswordCheck = async () => {
     try {
