@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const instace = axios.create({
-  baseURL: 'http://sharemindapp.com/api/v0',
+  baseURL: 'https://sharemindapp.com/api/v0',
 });
